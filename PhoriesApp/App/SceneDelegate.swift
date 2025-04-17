@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        imageView.layer.cornerRadius = 20
+        imageView.layer.cornerRadius = 18
         imageView.clipsToBounds = true
         
         let titleLabel = UILabel()
@@ -32,7 +32,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         titleLabel.text = "Save your memories"
         
         let stackView = UIStackView(arrangedSubviews: [imageView, titleLabel])
-        stackView.axis = .horizontal
+        stackView.axis = .vertical
         stackView.spacing = 12
         stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -89,6 +89,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Save changes in the application's managed object context when the application transitions to the background.
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
-
+    
 }
 
