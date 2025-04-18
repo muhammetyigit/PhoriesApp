@@ -10,11 +10,11 @@ PhoriesApp is an iOS application that allows users to take photos using the devi
 - Store and retrieve all data using **Core Data**
 
 ### 🛠 App Highlights
-- 🏁 Launch Screen**: Custom launch screen design and app icon  
-- 📍 Location Support**: Captures city and district using `CoreLocation`  
-- 💾 Persistent Storage**: Stores photos and locations with `Core Data`  
-- 🖼 Custom UI**: Custom `UICollectionViewCell` showing photo thumbnails  
-- 🧹 Delete Functionality**: Users can delete photos within edit mode
+- 🏁 Launch Screen: Custom launch screen design and app icon  
+- 📍 Location Support: Captures city and district using `CoreLocation`  
+- 💾 Persistent Storage: Stores photos and locations with `Core Data`  
+- 🖼 Custom UI: Custom `UICollectionViewCell` showing photo thumbnails  
+- 🧹 Delete Functionality: Users can delete photos within edit mode
 
 ### 📱 Technologies Used
 - Swift  
@@ -32,17 +32,17 @@ To get started with the project, follow these steps:
   git clone https://github.com/muhammetyigit/PhoriesApp.git
   open PhoriesApp.xcodeproj
 <p align="center">
-  <img src="https://github.com/muhammetyigit/TodoApp/blob/main/gif1.gif?raw=true" alt="PhoriesApp GIF 1" width="500"/>
+  <img src="https://github.com/muhammetyigit/PhoriesApp/blob/main/gif1.gif?raw=true" alt="PhoriesApp GIF 1" width="500"/>
   <br><br>
-  <img src="https://github.com/muhammetyigit/TodoApp/blob/main/gif2.gif?raw=true" alt="PhoriesApp GIF 2" width="500"/>
+  <img src="https://github.com/muhammetyigit/PhoriesApp/blob/main/gif2.gif?raw=true" alt="PhoriesApp GIF 2" width="500"/>
     <br><br>
-  <img src="https://github.com/muhammetyigit/TodoApp/blob/main/ss1.png?raw=true" alt="PhoriesApp Screenshot 1" width="500"/>
+  <img src="https://github.com/muhammetyigit/PhoriesApp/blob/main/ss1.png?raw=true" alt="PhoriesApp Screenshot 1" width="500"/>
     <br><br>
-  <img src="https://github.com/muhammetyigit/TodoApp/blob/main/ss2.png?raw=true" alt="PhoriesApp Screenshot 2" width="500"/>
+  <img src="https://github.com/muhammetyigit/PhoriesApp/blob/main/ss2.png?raw=true" alt="PhoriesApp Screenshot 2" width="500"/>
    <br><br>
-  <img src="https://github.com/muhammetyigit/TodoApp/blob/main/ss2.png?raw=true" alt="PhoriesApp Screenshot 3" width="500"/>
+  <img src="https://github.com/muhammetyigit/PhoriesApp/blob/main/ss3.png?raw=true" alt="PhoriesApp Screenshot 3" width="500"/>
    <br><br>
-  <img src="https://github.com/muhammetyigit/TodoApp/blob/main/ss2.png?raw=true" alt="PhoriesApp Screenshot 4" width="500"/>
+  <img src="https://github.com/muhammetyigit/PhoriesApp/blob/main/ss4.png?raw=true" alt="PhoriesApp Screenshot 4" width="500"/>
 </p>
 
 ## License
