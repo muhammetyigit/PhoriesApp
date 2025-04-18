@@ -1,6 +1,5 @@
 # PhoriesApp
-PhoriesApp is an iOS application that allows users to take photos using the device camera, automatically captures their location, and displays the photos in a gallery layout using UICollectionView. All photos and their associated location data are persistently stored using Core Data. The name Phories comes from combining photos and memories.
-— because every photo tells a story.
+PhoriesApp is an iOS application that allows users to take photos using the device camera, automatically captures their location, and displays the photos in a gallery layout using UICollectionView. All photos and their associated location data are persistently stored using Core Data. The name Phories comes from combining photos and memories — because every photo tells a story.
 
 ## ✅ Features
 - Take photos using the device camera  
