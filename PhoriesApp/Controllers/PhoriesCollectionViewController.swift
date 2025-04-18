@@ -20,6 +20,7 @@ class PhoriesCollectionViewController: UICollectionViewController, UIImagePicker
     let locationManager = CLLocationManager()
     var selectedItem: IndexPath?
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var isEditingMode = false
     
     // MARK: -  Life Cycle
     override func viewDidLoad() {
@@ -30,7 +31,7 @@ class PhoriesCollectionViewController: UICollectionViewController, UIImagePicker
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
-        
+
         load()
     }
     
@@ -41,10 +42,19 @@ class PhoriesCollectionViewController: UICollectionViewController, UIImagePicker
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCollectionViewCell
+
         if let imageData = photos[indexPath.row].binaryPhoto {
             let image = UIImage(data: imageData)
             cell.imageView.image = image
         }
+
+        // ✅ Yeni animasyonlu görünürlük
+        cell.setDeleteButtonVisibility(isEditingMode)
+
+        // Action ekle
+        cell.deleteButton.tag = indexPath.row
+        cell.deleteButton.addTarget(self, action: #selector(deleteButtonTapped(_:)), for: .touchUpInside)
+
         return cell
     }
     
@@ -169,5 +179,20 @@ class PhoriesCollectionViewController: UICollectionViewController, UIImagePicker
         } else {
             print("Kamera kullanılabilir değil.")
         }
+    }
+    
+    @IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
+        isEditingMode.toggle()
+        print("Edit Mode: \(isEditingMode)")
+        collectionView.reloadData()
+    }
+    
+    @objc func deleteButtonTapped(_ sender: UIButton) {
+        let index = sender.tag
+        let photoToDelete = photos[index]
+        context.delete(photoToDelete)
+        photos.remove(at: index)
+        saveItems()
+        collectionView.reloadData()
     }
 }

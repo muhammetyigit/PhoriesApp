@@ -17,6 +17,10 @@ class DetailphotoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        imageView.layer.cornerRadius = 30
+        imageView.clipsToBounds = true
+
+        
         if let photo = photo {
             if let imageData = photo.binaryPhoto {
                 let image = UIImage(data: imageData)
