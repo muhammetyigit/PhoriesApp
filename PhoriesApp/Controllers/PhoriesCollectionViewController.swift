@@ -31,7 +31,7 @@ class PhoriesCollectionViewController: UICollectionViewController, UIImagePicker
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
-
+        
         load()
     }
     
@@ -42,19 +42,17 @@ class PhoriesCollectionViewController: UICollectionViewController, UIImagePicker
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCollectionViewCell
-
+        
         if let imageData = photos[indexPath.row].binaryPhoto {
             let image = UIImage(data: imageData)
             cell.imageView.image = image
         }
-
-        // ✅ Yeni animasyonlu görünürlük
+        
         cell.setDeleteButtonVisibility(isEditingMode)
-
-        // Action ekle
+        
         cell.deleteButton.tag = indexPath.row
         cell.deleteButton.addTarget(self, action: #selector(deleteButtonTapped(_:)), for: .touchUpInside)
-
+        
         return cell
     }
     
@@ -70,7 +68,7 @@ class PhoriesCollectionViewController: UICollectionViewController, UIImagePicker
         }
     }
     
-    // Hücre boyutu
+    // MARK: - Cell Design
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemsPerRow: CGFloat = 3
         let spacing: CGFloat = 10
@@ -78,18 +76,15 @@ class PhoriesCollectionViewController: UICollectionViewController, UIImagePicker
         let width = (collectionView.bounds.width - totalSpacing) / itemsPerRow
         return CGSize(width: width, height: width)
     }
-
-    // Satır arası dikey boşluk
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
-
-    // Hücreler arası yatay boşluk
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
-
-    // Kenar boşlukları
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
     }
@@ -98,21 +93,21 @@ class PhoriesCollectionViewController: UICollectionViewController, UIImagePicker
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage {
             if let imageData = image.jpegData(compressionQuality: 0.8) {
-                getLocation { adres in
-                    if let adres = adres {
-                        print("Adres: \(adres)")
+                getLocation { address in
+                    if let address = address {
+                        print("Address: \(address)")
                         
                         let newPhories = Photo(context: self.context)
                         newPhories.binaryPhoto = imageData
-                        newPhories.adress = adres
-
+                        newPhories.adress = address
+                        
                         self.photos.append(newPhories)
                         self.saveItems()
                         DispatchQueue.main.async {
                             self.collectionView.reloadData()
                         }
                     } else {
-                        print("Adres alınamadı.")
+                        print("Address could not be obtained.")
                     }
                 }
             }
@@ -120,7 +115,6 @@ class PhoriesCollectionViewController: UICollectionViewController, UIImagePicker
         picker.dismiss(animated: true, completion: nil)
     }
     
-    // İptal edilirse
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
@@ -130,30 +124,34 @@ class PhoriesCollectionViewController: UICollectionViewController, UIImagePicker
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
-        if CLLocationManager.locationServicesEnabled() {
-            if let location = locationManager.location {
-                let geocoder = CLGeocoder()
-                geocoder.reverseGeocodeLocation(location) { placemarks, error in
-                    if let placemark = placemarks?.first,
-                       let city = placemark.locality,
-                       let district = placemark.subLocality {
-                        let fullAddress = "\(city)/\(district)"
-                        completion(fullAddress)
-                    } else {
-                        completion(nil)
+        DispatchQueue.global().async {
+            if CLLocationManager.locationServicesEnabled() {
+                if let location = self.locationManager.location {
+                    let geocoder = CLGeocoder()
+                    geocoder.reverseGeocodeLocation(location) { placemarks, error in
+                        if let placemark = placemarks?.first,
+                           let city = placemark.locality,
+                           let district = placemark.subLocality {
+                            let fullAddress = "\(district) - \(city)"
+                            completion(fullAddress)
+                        } else {
+                            completion(nil)
+                        }
                     }
+                } else {
+                    completion(nil)
                 }
-            } else {
-                completion(nil)
             }
         }
+        
+        
     }
     
     func saveItems() {
         do {
             try context.save()
         } catch {
-            print("❌ Core Data kayıt edilemedi: \(error.localizedDescription)")
+            print("❌ Failed to register Core Data: \(error.localizedDescription)")
         }
     }
     
@@ -161,9 +159,9 @@ class PhoriesCollectionViewController: UICollectionViewController, UIImagePicker
         let request: NSFetchRequest<Photo> = Photo.fetchRequest()
         do {
             photos = try context.fetch(request)
-            print("📸 Core Data'dan \(photos.count) kayıt yüklendi.")
+            print("📸 Loaded \(photos.count) record from Core Data.")
         } catch {
-            print("❌ Core Data'dan veri çekilemedi: \(error.localizedDescription)")
+            print("❌ Failed to retrieve data from Core Data: \(error.localizedDescription)")
         }
         collectionView.reloadData()
     }
@@ -177,7 +175,7 @@ class PhoriesCollectionViewController: UICollectionViewController, UIImagePicker
             picker.allowsEditing = false
             present(picker, animated: true, completion: nil)
         } else {
-            print("Kamera kullanılabilir değil.")
+            print("Camera not available.")
         }
     }
     

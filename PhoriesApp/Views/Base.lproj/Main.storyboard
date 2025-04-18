@@ -98,16 +98,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="zc2-8D-9xG">
-                                <rect key="frame" x="50" y="149" width="314" height="540"/>
+                                <rect key="frame" x="25" y="123" width="364" height="592"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H30-oL-7RL">
-                                        <rect key="frame" x="125" y="0.0" width="64" height="71"/>
+                                        <rect key="frame" x="150" y="0.0" width="64" height="49"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PE7-PM-7vu">
-                                        <rect key="frame" x="0.0" y="100" width="314" height="440"/>
+                                        <rect key="frame" x="0.0" y="78" width="364" height="514"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
@@ -120,8 +120,8 @@
                         <constraints>
                             <constraint firstItem="zc2-8D-9xG" firstAttribute="centerY" secondItem="8yE-9a-QTV" secondAttribute="centerY" id="5gf-34-qDP"/>
                             <constraint firstItem="zc2-8D-9xG" firstAttribute="centerX" secondItem="8yE-9a-QTV" secondAttribute="centerX" id="5qU-yf-Pj0"/>
-                            <constraint firstItem="zc2-8D-9xG" firstAttribute="top" secondItem="gdB-54-F8D" secondAttribute="top" constant="101" id="73u-GY-rbp"/>
-                            <constraint firstItem="zc2-8D-9xG" firstAttribute="leading" secondItem="gdB-54-F8D" secondAttribute="leading" constant="50" id="TpM-Lf-vQE"/>
+                            <constraint firstItem="zc2-8D-9xG" firstAttribute="top" secondItem="gdB-54-F8D" secondAttribute="top" constant="75" id="73u-GY-rbp"/>
+                            <constraint firstItem="zc2-8D-9xG" firstAttribute="leading" secondItem="gdB-54-F8D" secondAttribute="leading" constant="25" id="TpM-Lf-vQE"/>
                         </constraints>
                     </view>
                     <connections>
