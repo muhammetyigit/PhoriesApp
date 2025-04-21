@@ -30,6 +30,8 @@ To get started with the project, follow these steps:
   ```bash
   git clone https://github.com/muhammetyigit/PhoriesApp.git
   open PhoriesApp.xcodeproj
+  
+## 📸 Screenshots
 <p align="center">
   <img src="https://github.com/muhammetyigit/PhoriesApp/blob/main/gif1.gif?raw=true" alt="PhoriesApp GIF 1" width="500"/>
   <br><br>
